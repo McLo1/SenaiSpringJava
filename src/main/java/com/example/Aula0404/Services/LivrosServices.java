@@ -28,7 +28,7 @@ public class LivrosServices {
     }
 
     public Livros atualizar(@Valid Livros livros) {
-        Livros livrosAtualizar = livrosRepository.findByTitulo(livros.getTitulo())
+        Livros livrosAtualizar = livrosRepository.findById(livros.getId())
                 .orElseThrow(() -> new RuntimeException("Livro Já existente"));
 
         livrosAtualizar.setTitulo(livros.getTitulo());
@@ -38,8 +38,8 @@ public class LivrosServices {
        return livrosRepository.save(livrosAtualizar);
     }
 
-    public void excluir(String titulo){
-        Livros livrosAtualizar = livrosRepository.findByTitulo(titulo)
+    public void excluir(Long Id){
+        Livros livrosAtualizar = livrosRepository.findById(Id)
                 .orElseThrow(() -> new RuntimeException("Livro Já existente"));
 
         livrosRepository.deleteById(livrosAtualizar.getId());

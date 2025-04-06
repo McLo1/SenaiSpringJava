@@ -5,12 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.Map;
+import java.util.MissingFormatArgumentException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -49,5 +51,9 @@ public class GlobalExceptionHandler {
                 .body(Map.of("Mensagem", "Deu B.O ai em pai"));
     }
 
+    @ExceptionHandler (MissingPathVariableException.class)
+    public ResponseEntity<Map<String, Object>> handlerMissingPathVariableException(MissingPathVariableException erro){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("Mensagem", "Algum problema ai"));
 
+    }
 }
