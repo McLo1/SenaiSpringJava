@@ -22,7 +22,7 @@ public class MusicaService {
     }
 
     public Musica salvar(@Valid Musica musica){
-        if (musicaRepository.FindByNome(musica.getNome()).isPresent()){
+        if (musicaRepository.findByNome(musica.getNome()).isPresent()){
             throw new RuntimeException("Musica Já cadastrada");
         }
 
@@ -32,8 +32,8 @@ public class MusicaService {
 
     public Musica atualizar(@Valid Musica musica){
 
-        Musica musicaAtualizar = musicaRepository.FindByNome(musica.getNome())
-                .orElseThrow(() -> new RuntimeException("Musica Já cadastrada"));
+        Musica musicaAtualizar = musicaRepository.findById(musica.getId())
+                .orElseThrow(() -> new RuntimeException("Musica não existente cadastrada"));
 
         musicaAtualizar.setNome(musica.getNome());
         musicaAtualizar.setGenero(musica.getGenero());

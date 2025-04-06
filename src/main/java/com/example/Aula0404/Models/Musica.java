@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Musica {
@@ -11,7 +12,10 @@ public class Musica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "Insira o nome da musica")
     private String nome;
+
+    @NotBlank(message = "Insira o nome da musica")
     private String genero;
 
     public Musica() {
