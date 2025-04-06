@@ -49,5 +49,4 @@ public class FuncionarioServices {
         funcionarioRepository.deleteById(funcionarioAtualizar.getId());
     }
 
-
 }
